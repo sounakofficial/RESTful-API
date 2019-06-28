@@ -15,8 +15,8 @@ const OrderRoutes = require("./api/routes/orders");
 
 mongoose.connect(
   "mongodb+srv://sounak1337:" +
-    process.env.MONGO_ATLASS_PW +
-    "@mongocluster-vklk8.mongodb.net/test?retryWrites=true&w=majority",
+  process.env.MONGO_ATLASS_PW +
+  "@mongocluster-vklk8.mongodb.net/test?retryWrites=true&w=majority",
   {
     //useMongoClient:
     useNewUrlParser: true
