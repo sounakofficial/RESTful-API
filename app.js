@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Acccess-Control-Allow-Headers",
-    "Orihin, X-Requeset-With, Content-Type, Accept, Authorization"
+    "Origin, X-Requeset-With, Content-Type, Accept, Authorization"
   );
   if (req.method == "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");

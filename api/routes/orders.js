@@ -122,6 +122,7 @@ router.post("/", upload.single('productImage'), (req, res, next) => {
 
 router.get("/:orderId", (req, res, next) => {
   Order.findById(req.params.orderId)
+    .select('_id product quantity')
     .populate('product')
     .exec()
     .then(order => {
