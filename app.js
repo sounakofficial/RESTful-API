@@ -12,6 +12,7 @@ const mongoose = require("mongoose");
 
 const ProductRoutes = require("./api/routes/products");
 const OrderRoutes = require("./api/routes/orders");
+const UserRoutes = require("./api/routes/user")
 
 mongoose.connect(
   "mongodb+srv://sounak1337:" +
@@ -24,6 +25,7 @@ mongoose.connect(
 );
 
 app.use(morgan("dev"));
+app.use('/uploadData', express.static('uploadData'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -43,6 +45,7 @@ app.use((req, res, next) => {
 
 app.use("/products", ProductRoutes);
 app.use("/orders", OrderRoutes);
+app.use("/user", UserRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("not found");
@@ -58,5 +61,4 @@ app.use((error, req, res, next) => {
     }
   });
 });
-
 module.exports = app;
