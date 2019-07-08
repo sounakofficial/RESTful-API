@@ -4,6 +4,8 @@ const router = express.Router();
 const Order = require("../models/order");
 const Product = require('../models/products');
 const mongoose = require("mongoose");
+const checkauth = require("../middleware/check_auth");
+
 
 // const multer = require('multer');
 // const upload = multer({ dest: './uploads/' });
@@ -18,7 +20,7 @@ const mongoose = require("mongoose");
 
 
 
-router.get("/", (req, res, next) => {
+router.get("/", checkauth, (req, res, next) => {
   Order.find()
     .select('_id product quantity')
     .populate('product', '_id name')
@@ -61,7 +63,7 @@ router.get("/", (req, res, next) => {
 
 
 
-router.post("/", (req, res, next) => {
+router.post("/", checkauth, (req, res, next) => {
   Product.findById(req.body.productID)
     .then(product => {
       if (!product) {
@@ -119,7 +121,7 @@ router.post("/", (req, res, next) => {
 
 
 
-router.get("/:orderId", (req, res, next) => {
+router.get("/:orderId", checkauth, (req, res, next) => {
   Order.findById(req.params.orderId)
     .select('_id product quantity')
     .populate('product')
@@ -148,7 +150,7 @@ router.get("/:orderId", (req, res, next) => {
 
 
 
-router.patch("/", (req, res, next) => {
+router.patch("/", checkauth, (req, res, next) => {
   res.status(200).json({
     messege: "Handling patch requests to /orders"
   });
@@ -163,7 +165,7 @@ router.patch("/", (req, res, next) => {
 // });
 
 
-router.delete("/:orderID", (req, res, next) => {
+router.delete("/:orderID", checkauth, (req, res, next) => {
   Order.remove({ _id: req.params.orderID })
     .exec()
     .then(result => {
